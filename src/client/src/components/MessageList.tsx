@@ -11,7 +11,6 @@ export const MessageList = ({ messages }: { messages: Message[] }) => {
     return author;
   };
 
-  // Функція для форматування часу (ГГ:ХХ)
   const formatTime = (timeData: any) => {
     if (!timeData) return '';
     const date = new Date(timeData);

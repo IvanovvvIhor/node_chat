@@ -35,7 +35,7 @@ const roomService = {
   },
 
   getRooms: async () => {
-    const rooms = await Room.find().populate('users', 'userName name');
+    const rooms = await Room.find().populate('users', 'name');
 
     return rooms;
   },

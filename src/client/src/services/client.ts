@@ -76,24 +76,4 @@ export const client = {
       throw error;
     }
   },
-
-  sendMessage: async (roomId: string, authorId: string, text: string) => {
-    try {
-      const response = await api.post("/message/send", { roomId, authorId, text });
-      return response.data;
-    } catch (error) {
-      console.error("Помилка відправки повідомлення:", error);
-      throw error;
-    }
-  },
-
-  getMessages: async (roomId: string) => {
-    try {
-      const response = await api.get(`/message/${roomId}`);
-      return response.data;
-    } catch (error) {
-      console.error("Помилка отримання повідомлень:", error);
-      throw error;
-    }
-  },
 };

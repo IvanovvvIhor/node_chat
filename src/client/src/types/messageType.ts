@@ -3,5 +3,5 @@ export type Message = {
   authorId: string,
   text: string,
   _id: string,
-  _time: Date,
+  time: string,
 };

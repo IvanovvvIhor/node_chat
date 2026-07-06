@@ -26,10 +26,7 @@ const messageService = {
       query.$or.push({ roomId: new mongoose.Types.ObjectId(roomId) });
     }
 
-    const messages = await Message.find(query).populate(
-      'authorId',
-      'userName name',
-    );
+    const messages = await Message.find(query).populate('authorId', 'name');
 
     return messages;
   },

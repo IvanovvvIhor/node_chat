@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 /* eslint-disable max-len */
 /* eslint-disable no-console */
@@ -33,7 +34,8 @@ io.on('connection', (socket) => {
     socket.join(roomId);
 
     const { Room, Message } = require('./server/models');
-    const room = await Room.findById(roomId).populate('users', 'userName name');
+
+    const room = await Room.findById(roomId).populate('users', 'name');
 
     if (room) {
       io.to(roomId).emit('participants_updated', room.users);
@@ -41,28 +43,18 @@ io.on('connection', (socket) => {
 
     const messages = await Message.find({ roomId })
       .sort({ time: 1 })
-      .populate('authorId', 'userName name');
-
-    socket.emit('history', messages);
-  });
-
-  socket.on('join_room', async (roomId) => {
-    socket.join(roomId);
-
-    const messages = await Message.find({ roomId })
-      .sort({ time: 1 })
-      .populate('authorId', 'userName name');
+      .populate('authorId', 'name');
 
     socket.emit('history', messages);
   });
 
   socket.on('send_message', async (data) => {
     try {
+      const { Message } = require('./server/models');
       const newMessage = await Message.create(data);
-
       const populatedMessage = await Message.findById(newMessage._id).populate(
         'authorId',
-        'userName name',
+        'name',
       );
 
       io.to(data.roomId).emit('new_message', populatedMessage);

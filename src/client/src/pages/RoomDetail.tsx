@@ -17,12 +17,9 @@ export const RoomDetail = () => {
   const fetchData = async (currentUser: User) => {
     if (!roomId) return;
     try {
-      const userId = (currentUser as any)._id || currentUser._id;
-      await client.joinRoom(roomId, userId);
+      const userId = (currentUser as any)._id || currentUser._id; // або currentUser._id залежно від твого типу
 
-      // Завантажуємо історію через REST (як раніше)
-      const msgData = await client.getMessages(roomId);
-      setMessages(msgData as Message[]);
+      await client.joinRoom(roomId, userId);
 
       const rooms = await client.getAllRooms();
       const currentRoom = rooms.find((r: Room) => r._id === roomId || (r as any)._id === roomId);
@@ -48,8 +45,11 @@ export const RoomDetail = () => {
 
     if (roomId && parsedUser) {
       socket.connect();
-
       socket.emit('join_room', roomId);
+
+      socket.on('history', (historyMessages: Message[]) => {
+        setMessages(historyMessages);
+      });
 
       socket.on('new_message', (newMessage: Message) => {
         setMessages((prevMessages) => [...prevMessages, newMessage]);
@@ -61,6 +61,7 @@ export const RoomDetail = () => {
     }
 
     return () => {
+      socket.off('history');
       socket.off('new_message');
       socket.off('participants_updated');
       socket.disconnect();
@@ -81,7 +82,6 @@ export const RoomDetail = () => {
 
           <MessageList messages={messages} />
 
-          {/* З форми прибрано onMessageSent, тепер все роблять сокети */}
           <MessageForm
             roomId={roomId!}
             authorId={(user as any)._id || user._id}
