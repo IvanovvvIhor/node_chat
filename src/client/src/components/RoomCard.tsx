@@ -5,14 +5,14 @@ import type { Room } from "../types";
 
 type Props = {
   room: Room;
-  onRoomChanged: () => void; // Коллбек для оновлення списку після змін
+  onRoomChanged: () => void;
 };
 
 export const RoomCard = ({ room, onRoomChanged }: Props) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(room.name);
 
-  const roomId = (room as any)._id || room._id; // Безпечне отримання ID
+  const roomId = room._id;
 
   const handleUpdate = async () => {
     if (!newName.trim() || newName === room.name) {

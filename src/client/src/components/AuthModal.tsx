@@ -20,8 +20,6 @@ export const CreateUserModal = ({ onSuccess }: Props) => {
 
     try {
       let user;
-
-      // Викликаємо потрібний метод залежно від режиму
       if (isLogin) {
         user = await client.loginUser(name);
       } else {
@@ -31,7 +29,6 @@ export const CreateUserModal = ({ onSuccess }: Props) => {
       localStorage.setItem("user", JSON.stringify(user));
       onSuccess(user);
     } catch (err: any) {
-      // Виводимо різні помилки для різних режимів
       setError(isLogin ? 'Користувача не знайдено. Створіть акаунт.' : 'Помилка реєстрації (можливо, ім’я вже зайняте).');
     }
   };
@@ -54,7 +51,7 @@ export const CreateUserModal = ({ onSuccess }: Props) => {
         value={name}
         onChange={(e) => {
           setName(e.target.value);
-          setError(''); // Очищаємо помилку при введенні
+          setError(''); 
         }}
         placeholder="Ваше ім'я (напр. Hank)"
         style={{ width: '100%', marginBottom: '10px', padding: '10px', background: '#f9f9f9', color: '#333', border: '1px solid #ccc', borderRadius: '4px' }}

@@ -17,19 +17,22 @@ export const RoomDetail = () => {
   const fetchData = async (currentUser: User) => {
     if (!roomId) return;
     try {
-      const userId = (currentUser as any)._id || currentUser._id; // або currentUser._id залежно від твого типу
+      const userId = currentUser._id;
 
       await client.joinRoom(roomId, userId);
 
       const rooms = await client.getAllRooms();
-      const currentRoom = rooms.find((r: Room) => r._id === roomId || (r as any)._id === roomId);
+
+      const currentRoom = rooms.find((r: Room) => r._id === roomId);
 
       if (currentRoom) {
         setRoomName(currentRoom.name);
         setParticipants(currentRoom.users || []);
+      } else {
+        setRoomName("Кімнату не знайдено");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Помилка завантаження даних кімнати:", error);
     }
   };
 

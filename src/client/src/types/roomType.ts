@@ -1,7 +1,7 @@
-import type { User } from "./userType";
+import type { User } from './userType';
 
 export type Room = {
-  name: string,
-  users: User[],
-  _id: string,
-}
+  name: string;
+  users: User[];
+  _id: string;
+};

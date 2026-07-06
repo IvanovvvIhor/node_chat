@@ -22,7 +22,7 @@ export default defineConfig([
         ecmaFeatures: {
           jsx: true,
         },
-      },І
+      },
     },
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',

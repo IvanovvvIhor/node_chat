@@ -1,7 +1,7 @@
 export type Message = {
-  roomId: string,
-  authorId: string,
-  text: string,
-  _id: string,
-  time: string,
+  _id: string;
+  roomId: string;
+  authorId: { _id: string; name: string };
+  text: string;
+  time: string;
 };
