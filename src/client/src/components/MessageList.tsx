@@ -1,7 +1,7 @@
-import type { Message } from "../types";
+import type { Message, User } from "../types";
 
 export const MessageList = ({ messages }: { messages: Message[] }) => {
-  const getAuthorName = (author: any) => {
+  const getAuthorName = (author: User) => {
     if (!author) return 'Невідомий';
     return author.name || 'Невідомий';
   };
