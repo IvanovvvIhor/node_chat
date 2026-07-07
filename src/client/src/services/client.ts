@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from 'axios';
 
 const api = axios.create({
@@ -13,6 +14,7 @@ export const client = {
   getAllRooms: async () => {
     try {
       const response = await api.get('/room');
+
       return response.data;
     } catch (error) {
       console.error('Помилка отримання кімнат:', error);
@@ -23,6 +25,7 @@ export const client = {
   createRoom: async (nameRoom: string) => {
     try {
       const response = await api.post('/room/create', { nameRoom });
+
       return response.data;
     } catch (error) {
       console.error('Помилка створення кімнати:', error);
@@ -70,6 +73,7 @@ export const client = {
   joinRoom: async (roomId: string, userId: string) => {
     try {
       const response = await api.patch('/room/join', { roomId, userId });
+
       return response.data;
     } catch (error) {
       console.error('Помилка приєднання до кімнати:', error);
