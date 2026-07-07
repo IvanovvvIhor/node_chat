@@ -12,7 +12,7 @@ module.exports = {
   plugins: ['jest'],
   overrides: [
     {
-      files: ['**/*.ts', '**/*.tsx'],
+      files: ['src/client/**/*.{ts,tsx}'],
       parser: '@typescript-eslint/parser',
       parserOptions: {
         sourceType: 'module',
@@ -21,7 +21,6 @@ module.exports = {
           jsx: true,
         },
       },
-      plugins: ['@typescript-eslint', 'react'],
     },
   ],
 };
