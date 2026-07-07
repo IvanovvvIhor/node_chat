@@ -7,14 +7,14 @@ type Props = {
 };
 
 export const CreateUserModal = ({ onSuccess }: Props) => {
-  const [name, setName] = useState('');
+  const [nameU, setName] = useState('');
   const [error, setError] = useState('');
   const [isLogin, setIsLogin] = useState(true);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (name.trim().length === 0) {
+    if (nameU.trim().length === 0) {
       setError('Введіть ім’я');
 
       return;
@@ -24,9 +24,9 @@ export const CreateUserModal = ({ onSuccess }: Props) => {
       let user: User;
 
       if (isLogin) {
-        user = await client.loginUser(name);
+        user = await client.loginUser(nameU);
       } else {
-        user = await client.createUser(name);
+        user = await client.createUser(nameU);
       }
 
       window.localStorage.setItem('user', JSON.stringify(user));
@@ -61,7 +61,7 @@ export const CreateUserModal = ({ onSuccess }: Props) => {
 
       <input
         type="text"
-        value={name}
+        value={nameU}
         onChange={(e) => {
           setName(e.target.value);
           setError('');

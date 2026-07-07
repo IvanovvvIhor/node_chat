@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import React, { useState } from 'react';
 import { client } from '../services/client';
 
@@ -7,28 +6,28 @@ export const CreateRoomModal = ({
 }: {
   onRoomCreated: () => void;
 }) => {
-  const [name, setName] = useState('');
+  const [nameU, setName] = useState('');
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!name.trim()) {
+    if (!nameU.trim()) {
       return;
     }
 
     try {
-      await client.createRoom(name);
+      await client.createRoom(nameU);
       setName('');
       onRoomCreated();
     } catch (error) {
-      console.error(error);
+      return error;
     }
   };
 
   return (
     <form onSubmit={handleCreate} style={{ marginBottom: '20px' }}>
       <input
-        value={name}
+        value={nameU}
         onChange={(e) => setName(e.target.value)}
         placeholder="Назва нової кімнати"
         style={{
