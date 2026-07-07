@@ -1,24 +1,22 @@
 module.exports = {
   extends: '@mate-academy/eslint-config',
   env: {
-    node: true,
-    commonjs: true,
-    es2021: true,
     jest: true,
   },
   rules: {
     'no-proto': 0,
+    'no-console': ['error', { allow: ['warn', 'error'] }],
   },
-  plugins: ['jest', '@typescript-eslint', 'react'],
+  plugins: ['jest'],
   overrides: [
     {
       files: ['src/client/**/*.{ts,tsx}'],
       parser: '@typescript-eslint/parser',
-      rules: {
-        '@typescript-eslint/no-explicit-any': 'off',
-        'react/react-in-jsx-scope': 'off', 
-      }
-    }
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
+    },
   ],
-  ignorePatterns: ["node_modules/", "dist/"],
 };

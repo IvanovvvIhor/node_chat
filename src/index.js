@@ -1,7 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-shadow */
-/* eslint-disable max-len */
-/* eslint-disable no-console */
 const express = require('express');
 const { createServer } = require('node:http');
 const { Server } = require('socket.io');
@@ -15,7 +11,6 @@ const PORT = 3000;
 const userRouter = require('./server/routing/user.router');
 const messageRouter = require('./server/routing/message.router');
 const roomRouter = require('./server/routing/room.router');
-const { Message } = require('./server/models');
 
 app.use(cors());
 app.use(express.json());
@@ -28,8 +23,6 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket) => {
-  console.log('✅ A user connected:', socket.id);
-
   socket.on('join_room', async (roomId) => {
     socket.join(roomId);
 
@@ -63,15 +56,11 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('disconnect', () => {
-    console.log('❌ User disconnected');
-  });
+  socket.on('disconnect', () => {});
 });
 
 connectDB().then(() => {
-  server.listen(PORT, () => {
-    console.log(`🚀 Server is running on port: ${PORT}`);
-  });
+  server.listen(PORT, () => {});
 });
 
 app.use('/user', userRouter);

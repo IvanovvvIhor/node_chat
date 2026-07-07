@@ -15,7 +15,7 @@ export const RoomList = ({ rooms, onRoomChanged }: Props) => {
     <div style={{ marginTop: '20px' }}>
       {rooms.map((room) => (
         <RoomCard
-          key={(room as any)._id || room._id}
+          key={room._id || room._id}
           room={room}
           onRoomChanged={onRoomChanged}
         />
