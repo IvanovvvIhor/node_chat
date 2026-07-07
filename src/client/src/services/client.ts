@@ -16,7 +16,6 @@ export const client = {
 
       return response.data;
     } catch (error) {
-      console.error('Помилка отримання кімнат:', error);
       throw error;
     }
   },
@@ -27,7 +26,6 @@ export const client = {
 
       return response.data;
     } catch (error) {
-      console.error('Помилка створення кімнати:', error);
       throw error;
     }
   },
@@ -38,7 +36,6 @@ export const client = {
 
       return response.data;
     } catch (error) {
-      console.error('Помилка створення кімнати:', error);
       throw error;
     }
   },
@@ -49,22 +46,20 @@ export const client = {
 
   createUser: async (userName: string) => {
     try {
-      const response = await api.post('/user/register', { userName: userName });
+      const response = await api.post('/user/register', { userName });
 
       return response.data;
     } catch (error) {
-      console.error('Помилка створення користувача:', error);
       throw error;
     }
   },
 
   loginUser: async (userName: string) => {
     try {
-      const response = await api.post('/user/login', { userName: userName });
+      const response = await api.post('/user/login', { userName });
 
       return response.data;
     } catch (error) {
-      console.error('Помилка під час авторизації:', error);
       throw error;
     }
   },
@@ -75,7 +70,6 @@ export const client = {
 
       return response.data;
     } catch (error) {
-      console.error('Помилка приєднання до кімнати:', error);
       throw error;
     }
   },
